@@ -2,7 +2,7 @@
 
 import PillNav from "@/components/PillNav";
 import Logo3D from "@/components/Logo3d";
-import ShaderCanvas from "@/components/ShaderCanvas";
+import VideoBackground from "@/components/VideoBackground";
 import Footer from "@/components/Footer";
 import EpisodesSection from "@/components/EpisodesSection";
 import ArtistsSection from "@/components/ArtistsSection";
@@ -20,9 +20,7 @@ export default function Home() {
 
       event.preventDefault();
       const el = document.getElementById(href.replace("#", ""));
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     };
 
     document.addEventListener("click", handler);
@@ -31,7 +29,6 @@ export default function Home() {
 
   return (
     <div className="font-sans min-h-screen w-full bg-black text-white relative overflow-x-hidden">
-      
       <div className="fixed top-0 z-50 w-full flex justify-center pt-6 pointer-events-auto">
         <PillNav
           logo="/w.png"
@@ -54,25 +51,21 @@ export default function Home() {
         />
       </div>
 
-      <ShaderCanvas />
+      <VideoBackground src="/video/spectra-bg.mp4" poster="/poster.jpg" />
       <Logo3D />
 
-      <main className="w-full overflow-x-hidden">
-        
-        <section id="home" className="h-screen flex items-center justify-center text-xl overflow-x-hidden">
-          home section placeholder
-        </section>
+      <main className="w-full overflow-x-hidden relative z-10">
+        {/* EMPTY HOME SECTION — no placeholder text anymore */}
+        <section id="home" className="h-screen" />
 
-        <section id="miniapp" className="h-screen flex items-center justify-center text-xl overflow-x-hidden">
-          mini app section placeholder
-        </section>
+        {/* EMPTY MINI APP SECTION — will be iframe later */}
+        <section id="miniapp" className="h-screen" />
 
         <EpisodesSection />
 
-
-        {/* CONTACT SECTION – ULTRA DARK METALLIC */}
-        <section 
-          id="contact" 
+        {/* CONTACT SECTION */}
+        <section
+          id="contact"
           className="min-h-screen flex items-center justify-center py-32 px-4 overflow-x-hidden relative"
           style={{
             background: `
@@ -81,19 +74,20 @@ export default function Home() {
               radial-gradient(circle at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 50%),
               #000000
             `,
-            boxShadow: 'inset 0 0 150px rgba(0,0,0,0.9)',
+            boxShadow: "inset 0 0 150px rgba(0,0,0,0.9)",
           }}
         >
-          <div className="absolute inset-0 opacity-20 pointer-events-none"
+          <div
+            className="absolute inset-0 opacity-20 pointer-events-none"
             style={{
-              background: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.01) 10px, rgba(255,255,255,0.01) 20px)',
+              background:
+                "repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.01) 10px, rgba(255,255,255,0.01) 20px)",
             }}
           />
           <div className="w-full max-w-screen-2xl mx-auto relative z-10">
             <SpectraStepperForm />
           </div>
         </section>
-        
       </main>
 
       <Footer />
