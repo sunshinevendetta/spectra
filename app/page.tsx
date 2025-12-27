@@ -36,9 +36,7 @@ export default function Home() {
           items={[
             { label: "home", href: "#home" },
             { label: "mini app", href: "#miniapp" },
-            { label: "episodes", href: "#episodes" },
-            { label: "artists", href: "#artists" },
-            { label: "about", href: "#about" },
+            { label: "episodes", href: "#episodes" },    
             { label: "contact", href: "#contact" },
           ]}
           activeHref="#home"
