@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -5,7 +7,7 @@ import { SplitText as GSAPSplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
 import './Shuffle.css';
 
-gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
+gsap.registerPlugin(ScrollTrigger, GSAPSplitText);
 
 export interface ShuffleProps {
   text: string;
@@ -334,35 +336,21 @@ const Shuffle: React.FC<ShuffleProps> = ({
       };
     },
     {
-      dependencies: [
-        text,
-        duration,
-        maxDelay,
-        ease,
-        scrollTriggerStart,
-        fontsLoaded,
-        shuffleDirection,
-        shuffleTimes,
-        animationMode,
-        loop,
-        loopDelay,
-        stagger,
-        scrambleCharset,
-        colorFrom,
-        colorTo,
-        triggerOnce,
-        respectReducedMotion,
-        triggerOnHover,
-        onShuffleComplete
-      ],
       scope: ref
     }
   );
 
   const commonStyle: React.CSSProperties = useMemo(() => ({ textAlign, ...style }), [textAlign, style]);
   const classes = useMemo(() => `shuffle-parent ${ready ? 'is-ready' : ''} ${className}`, [ready, className]);
-  const Tag = (tag || 'p') as keyof JSX.IntrinsicElements;
-  return React.createElement(Tag, { ref: ref as any, className: classes, style: commonStyle }, text);
+
+  // Fixed: Use string for tag, avoid JSX namespace error
+  const Tag = tag as keyof HTMLElementTagNameMap;
+
+  return React.createElement(Tag, {
+    ref: ref as any,
+    className: classes,
+    style: commonStyle
+  }, text);
 };
 
 export default Shuffle;

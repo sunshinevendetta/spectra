@@ -5,7 +5,6 @@ import Logo3D from "@/components/Logo3d";
 import VideoBackground from "@/components/VideoBackground";
 import Footer from "@/components/Footer";
 import EpisodesSection from "@/components/EpisodesSection";
-import ArtistsSection from "@/components/ArtistsSection";
 import SpectraStepperForm from "@/components/SpectraStepperForm";
 import { useEffect } from "react";
 
@@ -29,6 +28,7 @@ export default function Home() {
 
   return (
     <div className="font-sans min-h-screen w-full bg-black text-white relative overflow-x-hidden">
+      {/* Fixed Navigation */}
       <div className="fixed top-0 z-50 w-full flex justify-center pt-6 pointer-events-auto">
         <PillNav
           logo="/w.png"
@@ -51,14 +51,17 @@ export default function Home() {
         />
       </div>
 
-      <VideoBackground src="/video/spectra-bg.mp4" poster="/poster.jpg" />
+      {/* Fullscreen Video Background — plays, loops, no sound */}
+      <VideoBackground />
+
+      {/* Interactive 3D Logo — user can drag, rotate, pinch, AR */}
       <Logo3D />
 
       <main className="w-full overflow-x-hidden relative z-10">
-        {/* EMPTY HOME SECTION — no placeholder text anymore */}
+        {/* EMPTY HOME SECTION */}
         <section id="home" className="h-screen" />
 
-        {/* EMPTY MINI APP SECTION — will be iframe later */}
+        {/* EMPTY MINI APP SECTION */}
         <section id="miniapp" className="h-screen" />
 
         <EpisodesSection />
