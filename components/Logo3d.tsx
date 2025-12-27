@@ -13,7 +13,7 @@ export default function Logo3D() {
 
   // Use React.createElement to avoid TypeScript JSX error for custom elements
   return React.createElement("model-viewer", {
-    src: "/models/logo.glb",
+    src: "https://raw.githubusercontent.com/sunshinevendetta/spectra/main/public/models/logo.glb",
     ar: true,
     "ar-modes": "webxr scene-viewer quick-look",
     "auto-rotate": true,
