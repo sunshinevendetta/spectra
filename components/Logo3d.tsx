@@ -6,31 +6,35 @@ export default function Logo3D() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    // Dynamically import model-viewer only on client
     if (!customElements.get("model-viewer")) {
       import("@google/model-viewer").catch(() => {
-        // ignore, prevents crash in case of race
+        // Silently ignore — prevents crash if already loaded
       });
     }
   }, []);
 
   return (
-    <model-viewer
-      src="/models/logo.glb"
-      ar
-      auto-rotate
-      auto-rotate-delay="0"
-      auto-rotate-speed="10"
-      camera-controls
-      exposure="1"
-      aria-label="spectra 3d logo"
-      style={{
+    // Use React.createElement to avoid TypeScript JSX error
+    // Since <model-viewer> is a custom element, not known to TS
+    React.createElement("model-viewer", {
+      src: "/models/logo.glb",
+      ar: true,
+      "auto-rotate": true,
+      "auto-rotate-delay": "0",
+      "auto-rotate-speed": "10",
+      "camera-controls": true,
+      exposure: "1",
+      "aria-label": "spectra 3d logo",
+      style: {
         position: "absolute",
         top: 0,
         left: 0,
         width: "100vw",
         height: "100vh",
-        zIndex: 1
-      }}
-    />
+        zIndex: 1,
+        pointerEvents: "none", // Optional: allows clicks to pass through to underlying elements
+      },
+    })
   );
 }

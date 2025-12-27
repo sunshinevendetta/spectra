@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from 'react';
-import { motion, PanInfo, useMotionValue, useTransform } from 'motion/react';
+import { motion, PanInfo, useMotionValue, useTransform, Transition } from 'motion/react';
 import './Carousel.css';
 
 import { FiLayers, FiCpu, FiActivity, FiCast, FiAperture } from 'react-icons/fi';
@@ -64,7 +64,9 @@ const ABOUT_ITEMS: CarouselItem[] = [
 const DRAG_BUFFER = 0;
 const VELOCITY_THRESHOLD = 500;
 const GAP = 16;
-const SPRING_OPTIONS = { type: 'spring', stiffness: 300, damping: 30 };
+
+const SPRING_TRANSITION: Transition = { type: 'spring', stiffness: 300, damping: 30 };
+const INSTANT_TRANSITION: Transition = { duration: 0 };
 
 export default function Carousel({
   items = ABOUT_ITEMS,
@@ -118,7 +120,8 @@ export default function Carousel({
     }
   }, [autoplay, autoplayDelay, isHovered, loop, items.length, carouselItems.length, pauseOnHover]);
 
-  const effectiveTransition = isResetting ? { duration: 0 } : SPRING_OPTIONS;
+  // Explicitly type the transition
+  const effectiveTransition: Transition = isResetting ? INSTANT_TRANSITION : SPRING_TRANSITION;
 
   const handleAnimationComplete = () => {
     if (loop && currentIndex === carouselItems.length - 1) {
